@@ -125,9 +125,23 @@
           "GeoIP-CN"
         ], 
         "outbound": "Direct"
-      }
+      },
+      {
+        "action": "route", 
+        "rule_set": [
+          "GeoSite-TikTok"
+        ], 
+        "outbound": "🇯🇵 日本"
+      } 
     ], 
     "rule_set": [
+      {
+        "tag": "GeoSite-TikTok", 
+        "type": "remote", 
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/tiktok.srs", 
+        "format": "binary", 
+        "download_detour": "Direct"
+      }, 
       {
         "tag": "GeoSite-Direct", 
         "type": "remote", 
