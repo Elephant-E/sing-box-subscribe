@@ -72,7 +72,7 @@
       "tolerance": 150, 
       "interrupt_exist_connections": false, 
       "outbounds": [
-        "{All}"
+        "{all}"
       ]
     }, 
     {
