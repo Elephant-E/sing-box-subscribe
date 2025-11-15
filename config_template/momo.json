@@ -92,16 +92,7 @@
         ]
       },
       {
-        "type": "logical",
-        "mode": "or",
-        "rules": [
-          {
-            "port": 53
-          },
-          {
-            "protocol": "dns"
-          }
-        ],
+        "inbound": "dns-in",
         "action": "hijack-dns"
       },
       {
