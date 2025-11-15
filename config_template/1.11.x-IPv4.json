@@ -1,0 +1,211 @@
+{
+  "log": {
+    "disabled": false, 
+    "level": "info", 
+    "output": "", 
+    "timestamp": false
+  }, 
+  "experimental": {
+    "cache_file": {
+      "enabled": true
+    }
+  }, 
+  "inbounds": [
+    {
+      "type": "tun", 
+      "address": "172.18.0.1/30",
+      "auto_route": true, 
+      "strict_route": true
+    }
+  ], 
+  "outbounds": [
+    {
+      "type": "urltest", 
+      "tag": "Auto", 
+      "url": "https://www.gstatic.com/generate_204", 
+      "interval": "3m", 
+      "tolerance": 150, 
+      "interrupt_exist_connections": false, 
+      "outbounds": [
+        "{all}"
+      ]
+    }, 
+    {
+      "type": "direct", 
+      "tag": "Direct"
+    }
+  ], 
+  "route": {
+    "rules": [
+      {
+        "action": "sniff", 
+        "sniffer": [
+          "http", 
+          "tls", 
+          "quic", 
+          "dns"
+        ]
+      },
+      {
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "protocol": "dns"
+          },
+          {
+            "port": 53
+          }
+        ],
+        "action": "hijack-dns"
+      },
+      {
+        "action": "route", 
+        "clash_mode": "direct", 
+        "outbound": "Direct"
+      }, 
+      {
+        "action": "route", 
+        "clash_mode": "global", 
+        "outbound": "Auto"
+      }, 
+      {
+        "action": "route", 
+        "rule_set": [
+          "GeoSite-Github"
+        ], 
+        "outbound": "Auto"
+      }, 
+      {
+        "action": "route", 
+        "rule_set": [
+          "GeoSite-Direct",
+          "GeoSite-Apple", 
+          "GeoSite-Microsoft", 
+          "GeoSite-Private", 
+          "GeoSite-CN", 
+          "GeoIP-Private",
+          "GeoIP-Apple",
+          "GeoIP-CN"
+        ], 
+        "outbound": "Direct"
+      }
+    ], 
+    "rule_set": [
+      {
+        "tag": "GeoSite-Direct", 
+        "type": "remote", 
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Elephant-E/Rules/refs/heads/main/Sing-Box/direct.json", 
+        "format": "source", 
+        "download_detour": "Direct"
+      }, 
+      {
+        "tag": "GeoSite-Github", 
+        "type": "remote", 
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/github.srs", 
+        "format": "binary", 
+        "download_detour": "Direct"
+      }, 
+      {
+        "tag": "GeoSite-Apple", 
+        "type": "remote", 
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/apple.srs", 
+        "format": "binary", 
+        "download_detour": "Direct"
+      }, 
+      {
+        "tag": "GeoSite-Microsoft", 
+        "type": "remote", 
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/microsoft.srs", 
+        "format": "binary", 
+        "download_detour": "Direct"
+      }, 
+      {
+        "tag": "GeoSite-Private", 
+        "type": "remote", 
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/private.srs", 
+        "format": "binary", 
+        "download_detour": "Direct"
+      }, 
+      {
+        "tag": "GeoSite-CN", 
+        "type": "remote", 
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/cn.srs", 
+        "format": "binary", 
+        "download_detour": "Direct"
+      }, 
+      {
+        "tag": "GeoIP-Private", 
+        "type": "remote", 
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/private.srs", 
+        "format": "binary", 
+        "download_detour": "Direct"
+      }, 
+      {
+        "tag": "GeoIP-Apple", 
+        "type": "remote", 
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo-lite/geoip/apple.srs", 
+        "format": "binary", 
+        "download_detour": "Direct"
+      },
+      {
+        "tag": "GeoIP-CN", 
+        "type": "remote", 
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/cn.srs", 
+        "format": "binary", 
+        "download_detour": "Direct"
+      }
+    ], 
+    "auto_detect_interface": true,
+    "final": "Auto"
+  }, 
+  "dns": {
+    "servers": [
+      {
+        "tag": "Local-DNS", 
+        "address": "223.5.5.5", 
+        "detour": "Direct"
+      }, 
+      {
+        "tag": "Remote-DNS", 
+        "address": "fakeip"
+      }
+    ], 
+    "rules": [
+      {
+        "action": "reject", 
+        "query_type": [
+          "HTTPS"
+        ]
+      }, 
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "rule_set": [
+              "GeoSite-Private"
+            ],
+            "invert": true
+          },
+          {
+            "query_type": [
+              "A", 
+              "AAAA"
+            ]
+          }
+        ],
+        "action": "route", 
+        "server": "Remote-DNS",
+        "rewrite_ttl": 1
+      }
+    ], 
+    "final": "Local-DNS", 
+    "independent_cache": true,
+    "fakeip": {
+      "enabled": true, 
+      "inet4_range": "198.18.0.0/15", 
+      "inet6_range": "fc00::/18"
+    }
+  }
+}
