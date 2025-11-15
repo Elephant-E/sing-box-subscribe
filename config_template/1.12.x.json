@@ -30,7 +30,6 @@
         "{all}"
       ]
     }, 
-
     {
       "type": "direct", 
       "tag": "Direct"
@@ -167,7 +166,8 @@
     "servers": [
       {
         "tag": "Local-DNS", 
-        "type": "dhcp"
+        "type": "udp",
+        "server": "223.5.5.5"
       }, 
       {
         "tag": "Remote-DNS", 
@@ -209,3 +209,4 @@
     "independent_cache": true
   }
 }
+
