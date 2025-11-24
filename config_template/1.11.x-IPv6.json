@@ -95,7 +95,7 @@
           "GeoSite-TikTok"
         ], 
         "outbound": "🇰🇷 韩国"
-      } 
+      }, 
       {
         "action": "route", 
         "rule_set": [
