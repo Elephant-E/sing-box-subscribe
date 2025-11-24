@@ -59,10 +59,10 @@
         "mode": "or",
         "rules": [
           {
-            "port": 53
+            "protocol": "dns"
           },
           {
-            "protocol": "dns"
+            "port": 53
           }
         ],
         "action": "hijack-dns"
@@ -87,6 +87,14 @@
       {
         "action": "route", 
         "rule_set": [
+          "GeoSite-OpenAI",
+          "GeoSite-TikTok"
+        ], 
+        "outbound": "🇰🇷 韩国"
+      } 
+      {
+        "action": "route", 
+        "rule_set": [
           "GeoSite-Direct",
           "GeoSite-Apple", 
           "GeoSite-Microsoft", 
@@ -97,16 +105,16 @@
           "GeoIP-CN"
         ], 
         "outbound": "Direct"
-      },
-      {
-        "action": "route", 
-        "rule_set": [
-          "GeoSite-TikTok"
-        ], 
-        "outbound": "🇯🇵 日本"
-      } 
+      }
     ], 
     "rule_set": [
+      {
+        "tag": "GeoSite-OpenAI", 
+        "type": "remote", 
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/openai.srs", 
+        "format": "binary", 
+        "download_detour": "Direct"
+      }, 
       {
         "tag": "GeoSite-TikTok", 
         "type": "remote", 
@@ -231,6 +239,7 @@
     "independent_cache": true
   }
 }
+
 
 
 
