@@ -90,7 +90,7 @@
           "GeoSite-OpenAI",
           "GeoSite-TikTok"
         ], 
-        "outbound": "🇨🇳 台湾"
+        "outbound": "🇹🇼 台湾"
       }, 
       {
         "action": "route", 
