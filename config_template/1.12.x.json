@@ -33,7 +33,7 @@
         {
           "action": "include",
           "keywords": [
-            "香港"
+            "日本"
           ]
         }
       ]
@@ -87,14 +87,6 @@
       {
         "action": "route", 
         "rule_set": [
-          "GeoSite-OpenAI",
-          "GeoSite-TikTok"
-        ], 
-        "outbound": "🇹🇼 台湾"
-      }, 
-      {
-        "action": "route", 
-        "rule_set": [
           "GeoSite-Direct",
           "GeoSite-Apple", 
           "GeoSite-Microsoft", 
@@ -108,20 +100,6 @@
       }
     ], 
     "rule_set": [
-      {
-        "tag": "GeoSite-OpenAI", 
-        "type": "remote", 
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/openai.srs", 
-        "format": "binary", 
-        "download_detour": "Direct"
-      }, 
-      {
-        "tag": "GeoSite-TikTok", 
-        "type": "remote", 
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/tiktok.srs", 
-        "format": "binary", 
-        "download_detour": "Direct"
-      },
       {
         "tag": "GeoSite-Direct", 
         "type": "remote", 
@@ -239,6 +217,7 @@
     "independent_cache": true
   }
 }
+
 
 
 
