@@ -28,14 +28,6 @@
       "interrupt_exist_connections": false, 
       "outbounds": [
         "{all}"
-      ],
-      "filter": [
-        {
-          "action": "include",
-          "keywords": [
-            "日本"
-          ]
-        }
       ]
     }, 
     {
@@ -217,6 +209,7 @@
     "independent_cache": true
   }
 }
+
 
 
 
