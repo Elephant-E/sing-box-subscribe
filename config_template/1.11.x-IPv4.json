@@ -21,7 +21,7 @@
   "outbounds": [
     {
       "type": "urltest", 
-      "tag": "Auto", 
+      "tag": "香港", 
       "url": "https://www.gstatic.com/generate_204", 
       "interval": "3m", 
       "tolerance": 150, 
@@ -34,6 +34,25 @@
           "action": "include",
           "keyword": [
             "香港"
+          ]
+        }
+      ]
+    }, 
+    {
+      "type": "urltest", 
+      "tag": "台湾", 
+      "url": "https://www.gstatic.com/generate_204", 
+      "interval": "3m", 
+      "tolerance": 150, 
+      "interrupt_exist_connections": false, 
+      "outbounds": [
+        "{all}"
+      ],
+      "filter": [
+        {
+          "action": "include",
+          "keyword": [
+            "台湾"
           ]
         }
       ]
@@ -87,6 +106,14 @@
       {
         "action": "route", 
         "rule_set": [
+          "GeoSite-TikTok",
+          "GeoSite-OpenAI"
+        ], 
+        "outbound": "台湾"
+      },
+      {
+        "action": "route", 
+        "rule_set": [
           "GeoSite-Direct",
           "GeoSite-Apple", 
           "GeoSite-Microsoft", 
@@ -100,6 +127,20 @@
       }
     ], 
     "rule_set": [
+      {
+        "tag": "GeoSite-TikTok", 
+        "type": "remote", 
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/tiktok.srs", 
+        "format": "binary", 
+        "download_detour": "Direct"
+      }, 
+      {
+        "tag": "GeoSite-OpenAI", 
+        "type": "remote", 
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/openai.srs", 
+        "format": "binary", 
+        "download_detour": "Direct"
+      }, 
       {
         "tag": "GeoSite-Direct", 
         "type": "remote", 
