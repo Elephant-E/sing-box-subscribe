@@ -28,6 +28,33 @@
       "interrupt_exist_connections": false, 
       "outbounds": [
         "{all}"
+      ],
+      "filter": [
+        {
+          "action": "include",
+          "keyword": [
+            "香港"
+          ]
+        }
+      ]
+    }, 
+    {
+      "type": "urltest", 
+      "tag": "台湾", 
+      "url": "https://www.gstatic.com/generate_204", 
+      "interval": "3m", 
+      "tolerance": 150, 
+      "interrupt_exist_connections": false, 
+      "outbounds": [
+        "{all}"
+      ],
+      "filter": [
+        {
+          "action": "include",
+          "keyword": [
+            "台湾"
+          ]
+        }
       ]
     }, 
     {
@@ -75,6 +102,14 @@
           "GeoSite-Github"
         ], 
         "outbound": "Auto"
+      },
+      {
+        "action": "route", 
+        "rule_set": [
+          "GeoSite-TikTok",
+          "GeoSite-OpenAI"
+        ], 
+        "outbound": "台湾"
       }, 
       {
         "action": "route", 
@@ -92,6 +127,20 @@
       }
     ], 
     "rule_set": [
+      {
+        "tag": "GeoSite-TikTok", 
+        "type": "remote", 
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Elephant-E/Rules/refs/heads/main/Sing-Box/tiktok.json", 
+        "format": "source", 
+        "download_detour": "Direct"
+      }, 
+      {
+        "tag": "GeoSite-OpenAI", 
+        "type": "remote", 
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Elephant-E/Rules/refs/heads/main/Sing-Box/openai.json", 
+        "format": "source", 
+        "download_detour": "Direct"
+      }, 
       {
         "tag": "GeoSite-Direct", 
         "type": "remote", 
@@ -209,6 +258,7 @@
     "independent_cache": true
   }
 }
+
 
 
 
