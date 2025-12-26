@@ -32,7 +32,7 @@
       "filter": [
         {
           "action": "include",
-          "keyword": [
+          "keywords": [
             "香港"
           ]
         }
@@ -51,7 +51,7 @@
       "filter": [
         {
           "action": "include",
-          "keyword": [
+          "keywords": [
             "台湾"
           ]
         }
@@ -258,6 +258,7 @@
     "independent_cache": true
   }
 }
+
 
 
 
