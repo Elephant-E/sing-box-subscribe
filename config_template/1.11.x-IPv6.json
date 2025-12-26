@@ -135,14 +135,14 @@
         "tag": "GeoSite-TikTok", 
         "type": "remote", 
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Elephant-E/Rules/refs/heads/main/Sing-Box/tiktok.json", 
-        "format": "source", 
+        "format": "binary", 
         "download_detour": "Direct"
       }, 
       {
         "tag": "GeoSite-OpenAI", 
         "type": "remote", 
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Elephant-E/Rules/refs/heads/main/Sing-Box/openai.json", 
-        "format": "source", 
+        "format": "binary", 
         "download_detour": "Direct"
       }, 
       {
