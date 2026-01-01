@@ -251,8 +251,8 @@
     "servers": [
       {
         "tag": "Local-DNS", 
-        "type": "udp",
-        "server": "223.5.5.5"
+        "type": "dhcp",
+        "interface": "pppoe-wan"
       }, 
       {
         "tag": "Remote-DNS", 
