@@ -130,14 +130,14 @@
       {
         "tag": "GeoSite-TikTok", 
         "type": "remote", 
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Elephant-E/Rules/refs/heads/main/Sing-Box/tiktok.srs", 
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/tiktok.srs", 
         "format": "binary", 
         "download_detour": "Direct"
       }, 
       {
         "tag": "GeoSite-OpenAI", 
         "type": "remote", 
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Elephant-E/Rules/refs/heads/main/Sing-Box/openai.srs", 
+        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/openai.srs",
         "format": "binary", 
         "download_detour": "Direct"
       }, 
@@ -258,6 +258,7 @@
     "independent_cache": true
   }
 }
+
 
 
 
