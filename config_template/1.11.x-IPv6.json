@@ -128,7 +128,6 @@
           "GeoSite-Microsoft", 
           "GeoSite-Private", 
           "GeoSite-CN", 
-          "GeoIP-Private",
           "GeoIP-Apple",
           "GeoIP-CN"
         ], 
