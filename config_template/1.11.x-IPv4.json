@@ -87,6 +87,11 @@
         "action": "hijack-dns"
       },
       {
+        "action": "route",
+        "ip_is_private": true,
+        "outbound": "Direct"
+      },
+      {
         "action": "route", 
         "clash_mode": "direct", 
         "outbound": "Direct"
@@ -119,7 +124,6 @@
           "GeoSite-Microsoft", 
           "GeoSite-Private", 
           "GeoSite-CN", 
-          "GeoIP-Private",
           "GeoIP-Apple",
           "GeoIP-CN"
         ], 
@@ -180,13 +184,6 @@
         "tag": "GeoSite-CN", 
         "type": "remote", 
         "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/cn.srs", 
-        "format": "binary", 
-        "download_detour": "Direct"
-      }, 
-      {
-        "tag": "GeoIP-Private", 
-        "type": "remote", 
-        "url": "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/private.srs", 
         "format": "binary", 
         "download_detour": "Direct"
       }, 
