@@ -33,6 +33,7 @@
         {
           "action": "include",
           "keywords": [
+            "🇭🇰",
             "香港"
           ]
         }
@@ -40,7 +41,7 @@
     }, 
     {
       "type": "urltest", 
-      "tag": "台湾", 
+      "tag": "US", 
       "url": "https://www.gstatic.com/generate_204", 
       "interval": "3m", 
       "tolerance": 150, 
@@ -52,7 +53,8 @@
         {
           "action": "include",
           "keywords": [
-            "台湾"
+            "🇺🇸",
+            "美国"
           ]
         }
       ]
@@ -114,7 +116,7 @@
           "GeoSite-TikTok",
           "GeoSite-OpenAI"
         ], 
-        "outbound": "台湾"
+        "outbound": "US"
       }, 
       {
         "action": "route", 
