@@ -28,35 +28,6 @@
       "interrupt_exist_connections": false, 
       "outbounds": [
         "{all}"
-      ],
-      "filter": [
-        {
-          "action": "include",
-          "keywords": [
-            "🇭🇰",
-            "香港"
-          ]
-        }
-      ]
-    }, 
-    {
-      "type": "urltest", 
-      "tag": "US", 
-      "url": "https://www.gstatic.com/generate_204", 
-      "interval": "3m", 
-      "tolerance": 150, 
-      "interrupt_exist_connections": false, 
-      "outbounds": [
-        "{all}"
-      ],
-      "filter": [
-        {
-          "action": "include",
-          "keywords": [
-            "🇺🇸",
-            "美国"
-          ]
-        }
       ]
     }, 
     {
@@ -113,14 +84,6 @@
       {
         "action": "route", 
         "rule_set": [
-          "GeoSite-TikTok",
-          "GeoSite-OpenAI"
-        ], 
-        "outbound": "US"
-      },
-      {
-        "action": "route", 
-        "rule_set": [
           "GeoSite-Direct",
           "GeoSite-Apple", 
           "GeoSite-Microsoft", 
@@ -132,20 +95,6 @@
       }
     ], 
     "rule_set": [
-      {
-        "tag": "GeoSite-TikTok", 
-        "type": "remote", 
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-tiktok.srs", 
-        "format": "binary", 
-        "download_detour": "Direct"
-      }, 
-      {
-        "tag": "GeoSite-OpenAI", 
-        "type": "remote", 
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-openai.srs", 
-        "format": "binary", 
-        "download_detour": "Direct"
-      }, 
       {
         "tag": "GeoSite-Direct", 
         "type": "remote", 
