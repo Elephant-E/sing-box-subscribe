@@ -34,17 +34,15 @@
       "interrupt_exist_connections": false,
       "outbounds": [
         "Direct"
-      ]
-    },
-    {
-      "type": "urltest",
-      "tag": "US",
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "3m",
-      "tolerance": 150,
-      "interrupt_exist_connections": false,
-      "outbounds": [
-        "Direct"
+      ],
+      "filter": [
+        {            
+          "action": "include",          
+          "keywords": [            
+            "美国",          
+            "香港"            
+          ]
+        }
       ]
     },
     {
