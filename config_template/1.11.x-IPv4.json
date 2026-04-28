@@ -28,17 +28,27 @@
       "interrupt_exist_connections": false, 
       "outbounds": [
         "{all}"
+      ]
+    }, 
+    {
+      "type": "urltest",
+      "tag": "!HK",
+      "url": "https://www.gstatic.com/generate_204", 
+      "interval": "3m", 
+      "tolerance": 150, 
+      "interrupt_exist_connections": false, 
+      "outbounds": [
+        "{all}"
       ],
       "filter": [
         {            
-          "action": "include",          
+          "action": "exclude",          
           "keywords": [            
-            "美国",          
-            "香港"            
+            "🇭🇰|HK|hk|香港|港|HongKong",        
           ]
         }
       ]
-    }, 
+    }
     {
       "type": "direct", 
       "tag": "Direct"
