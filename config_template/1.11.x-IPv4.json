@@ -96,6 +96,13 @@
       {
         "action": "route", 
         "rule_set": [
+          "GeoSite-TikTok"
+        ], 
+        "outbound": "Other"
+      },
+      {
+        "action": "route", 
+        "rule_set": [
           "GeoSite-Github"
         ], 
         "outbound": "Auto"
@@ -125,6 +132,13 @@
         "tag": "GeoSite-Github", 
         "type": "remote", 
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-github.srs", 
+        "format": "binary", 
+        "download_detour": "Direct"
+      }, 
+      {
+        "tag": "GeoSite-TikTok", 
+        "type": "remote", 
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-tiktok.srs", 
         "format": "binary", 
         "download_detour": "Direct"
       }, 
