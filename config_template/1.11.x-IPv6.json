@@ -35,8 +35,26 @@
       "filter": [
         {            
           "action": "include",          
-          "keywords": [            
-            "美国",          
+          "keywords": [                    
+            "香港"            
+          ]
+        }
+      ]
+    }, 
+    {
+      "type": "urltest", 
+      "tag": "Other", 
+      "url": "https://www.gstatic.com/generate_204", 
+      "interval": "3m", 
+      "tolerance": 150, 
+      "interrupt_exist_connections": false, 
+      "outbounds": [
+        "{all}"
+      ],
+      "filter": [
+        {            
+          "action": "exclude",          
+          "keywords": [                    
             "香港"            
           ]
         }
@@ -90,6 +108,13 @@
       {
         "action": "route", 
         "rule_set": [
+          "GeoSite-TikTok"
+        ], 
+        "outbound": "Other"
+      },
+      {
+        "action": "route", 
+        "rule_set": [
           "GeoSite-Github"
         ], 
         "outbound": "Auto"
@@ -119,6 +144,13 @@
         "tag": "GeoSite-Github", 
         "type": "remote", 
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-github.srs", 
+        "format": "binary", 
+        "download_detour": "Direct"
+      }, 
+      {
+        "tag": "GeoSite-TikTok", 
+        "type": "remote", 
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-tiktok.srs", 
         "format": "binary", 
         "download_detour": "Direct"
       }, 
