@@ -34,27 +34,16 @@
       "interrupt_exist_connections": false, 
       "outbounds": [
         "{all}"
-      ]
-    }, 
-    {
-      "type": "urltest",
-      "tag": "!HK",
-      "url": "https://www.gstatic.com/generate_204", 
-      "interval": "3m", 
-      "tolerance": 150, 
-      "interrupt_exist_connections": false, 
-      "outbounds": [
-        "{all}"
-      ],
+      ], 
       "filter": [
-        {            
-          "action": "exclude",          
-          "keywords": [            
-            "🇭🇰|HK|hk|香港|港|HongKong",        
+        {
+          "action": "exclude", 
+          "keywords": [
+            "官网|到期时间|剩余|流量|套餐|免费|订阅|全球直连|GB|Expire Date|Traffic|ExpireDate"
           ]
         }
       ]
-    },
+    }, 
     {
       "type": "direct",
       "tag": "Direct"
