@@ -34,14 +34,6 @@
       "interrupt_exist_connections": false, 
       "outbounds": [
         "{all}"
-      ], 
-      "filter": [
-        {
-          "action": "exclude", 
-          "keywords": [
-            "官网|到期时间|剩余|流量|套餐|免费|订阅|全球直连|GB|Expire Date|Traffic|ExpireDate"
-          ]
-        }
       ]
     }, 
     {
