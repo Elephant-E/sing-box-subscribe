@@ -135,49 +135,49 @@
       {
         "tag": "GeoSite-Github", 
         "type": "remote", 
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-github.srs", 
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/github.srs", 
         "format": "binary", 
         "download_detour": "Direct"
       }, 
       {
         "tag": "GeoSite-TikTok", 
         "type": "remote", 
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-tiktok.srs", 
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/tiktok.srs", 
         "format": "binary", 
         "download_detour": "Direct"
       }, 
       {
         "tag": "GeoSite-Apple", 
         "type": "remote", 
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-apple.srs", 
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/apple.srs", 
         "format": "binary", 
         "download_detour": "Direct"
       }, 
       {
         "tag": "GeoSite-Microsoft", 
         "type": "remote", 
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-microsoft.srs", 
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/microsoft.srs", 
         "format": "binary", 
         "download_detour": "Direct"
       }, 
       {
         "tag": "GeoSite-Private", 
         "type": "remote", 
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-private.srs", 
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/private.srs", 
         "format": "binary", 
         "download_detour": "Direct"
       }, 
       {
         "tag": "GeoSite-CN", 
         "type": "remote", 
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs", 
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/cn.srs", 
         "format": "binary", 
         "download_detour": "Direct"
       }, 
       {
         "tag": "GeoIP-CN", 
         "type": "remote", 
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs", 
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geoip/cn.srs", 
         "format": "binary", 
         "download_detour": "Direct"
       }
