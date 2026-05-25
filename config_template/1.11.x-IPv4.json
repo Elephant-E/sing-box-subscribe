@@ -114,7 +114,7 @@
           "GeoSite-Direct",
           "GeoSite-Apple", 
           "GeoSite-Microsoft",
-          "GeoSite-CN"
+          "GeoSite-CN",
           "GeoIP-CN"
         ], 
         "outbound": "Direct"
