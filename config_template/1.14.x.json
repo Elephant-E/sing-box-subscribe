@@ -84,11 +84,26 @@
       {
         "action": "route",
         "rule_set": [
+          "GeoSite-Private",
           "GeoSite-Direct",
           "GeoSite-Apple",
-          "GeoSite-Microsoft",
-          "GeoSite-Private",
-          "GeoSite-CN",
+          "GeoSite-Microsoft"
+        ],
+        "outbound": "Direct"
+      },
+      {
+        "action": "route",
+        "rule_set": [
+          "GeoSite-!CN"
+        ],
+        "outbound": "Auto"
+      },
+      {
+        "action": "resolve"
+      },
+      {
+        "action": "route",
+        "rule_set": [
           "GeoIP-CN"
         ],
         "outbound": "Direct"
@@ -123,6 +138,12 @@
         "tag": "GeoSite-Private",
         "type": "remote",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/private.srs",
+        "format": "binary"
+      },
+      {
+        "tag": "GeoSite-!CN", 
+        "type": "remote", 
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.srs",
         "format": "binary"
       },
       {
