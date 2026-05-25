@@ -99,6 +99,13 @@
         "outbound": "Auto"
       },
       {
+        "action": "route",
+        "rule_set": [
+          "GeoSite-CN"
+        ],
+        "outbound": "Direct"
+      },
+      {
         "action": "resolve"
       },
       {
