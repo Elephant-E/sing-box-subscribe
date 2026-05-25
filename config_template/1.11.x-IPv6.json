@@ -136,7 +136,7 @@
         "rule_set": [
           "GeoIP-CN"
         ],
-        "action": "Direct"
+        "outbound": "Direct"
       }
     ],  
     "rule_set": [
