@@ -100,13 +100,6 @@
       {
         "action": "route", 
         "rule_set": [
-          "GeoSite-TikTok"
-        ], 
-        "outbound": "Other"
-      },
-      {
-        "action": "route", 
-        "rule_set": [
           "GeoSite-Github"
         ], 
         "outbound": "Auto"
@@ -114,16 +107,38 @@
       {
         "action": "route", 
         "rule_set": [
+          "GeoSite-Private", 
           "GeoSite-Direct",
           "GeoSite-Apple", 
-          "GeoSite-Microsoft", 
-          "GeoSite-Private", 
-          "GeoSite-CN", 
-          "GeoIP-CN"
+          "GeoSite-Microsoft"
         ], 
         "outbound": "Direct"
+      },
+      {
+        "action": "route",
+        "rule_set": [
+          "GeoSite-!CN"
+        ],
+        "outbound": "Auto"
+      },
+      {
+        "action": "route",
+        "rule_set": [
+          "GeoSite-CN"
+        ],
+        "outbound": "Direct"
+      },
+      {
+        "action": "resolve"
+      },
+      {
+        "action": "route",
+        "rule_set": [
+          "GeoIP-CN"
+        ],
+        "action": "Direct"
       }
-    ], 
+    ],  
     "rule_set": [
       {
         "tag": "GeoSite-Direct", 
@@ -136,13 +151,6 @@
         "tag": "GeoSite-Github", 
         "type": "remote", 
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/github.srs", 
-        "format": "binary", 
-        "download_detour": "Direct"
-      }, 
-      {
-        "tag": "GeoSite-TikTok", 
-        "type": "remote", 
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/tiktok.srs", 
         "format": "binary", 
         "download_detour": "Direct"
       }, 
@@ -167,6 +175,13 @@
         "format": "binary", 
         "download_detour": "Direct"
       }, 
+      {
+        "tag": "GeoSite-!CN", 
+        "type": "remote", 
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.srs",
+        "format": "binary", 
+        "download_detour": "Direct"
+      },
       {
         "tag": "GeoSite-CN", 
         "type": "remote", 
