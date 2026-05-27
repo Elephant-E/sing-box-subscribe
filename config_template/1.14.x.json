@@ -1,9 +1,6 @@
 {
   "log": {
-    "disabled": false,
-    "level": "info",
-    "output": "",
-    "timestamp": false
+    "level": "info"
   },
   "experimental": {
     "cache_file": {
@@ -13,7 +10,7 @@
   "inbounds": [
     {
       "type": "tun",
-      "address": ["172.18.0.1/30"],
+      "address": "172.18.0.1/30",
       "auto_route": true,
       "strict_route": true
     }
@@ -60,89 +57,89 @@
         "action": "hijack-dns"
       },
       {
-        "action": "route",
         "ip_is_private": true,
         "outbound": "Direct"
       },
       {
-        "action": "route",
         "clash_mode": "direct",
         "outbound": "Direct"
       },
       {
-        "action": "route",
         "clash_mode": "global",
         "outbound": "Auto"
       },
       {
-        "action": "route",
-        "rule_set": [
-          "GeoSite-Github"
-        ],
+        "rule_set": "GeoSite-Github",
         "outbound": "Auto"
       },
       {
-        "action": "route",
         "rule_set": [
           "GeoSite-Private",
           "GeoSite-Direct",
           "GeoSite-Apple",
           "GeoSite-Microsoft",
-          "GeoSite-CN",
-          "GeoIP-CN"
+          "GeoSite-CN"
         ],
+        "outbound": "Direct"
+      },
+      {
+        "rule_set": "GeoSite-!CN",
+        "outbound": "Auto"
+      },
+      {
+        "action": "resolve"
+      },
+      {
+        "rule_set": "GeoIP-CN",
         "outbound": "Direct"
       }
     ],
     "rule_set": [
       {
+        "type": "remote",
         "tag": "GeoSite-Direct",
-        "type": "remote",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Elephant-E/Rules/refs/heads/main/Sing-Box/direct.json",
-        "format": "source"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Elephant-E/Rules/refs/heads/main/Sing-Box/direct.json"
       },
       {
+        "type": "remote",
+        "tag": "GeoSite-!CN",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.srs"
+      },
+      {
+        "type": "remote",
         "tag": "GeoSite-Github",
-        "type": "remote",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/github.srs",
-        "format": "binary"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/github.srs"
       },
       {
+        "type": "remote",
         "tag": "GeoSite-Apple",
-        "type": "remote",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/apple.srs",
-        "format": "binary"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/apple.srs"
       },
       {
+        "type": "remote",
         "tag": "GeoSite-Microsoft",
-        "type": "remote",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/microsoft.srs",
-        "format": "binary"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/microsoft.srs"
       },
       {
+        "type": "remote",
         "tag": "GeoSite-Private",
-        "type": "remote",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/private.srs",
-        "format": "binary"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/private.srs"
       },
       {
+        "type": "remote",
         "tag": "GeoSite-CN",
-        "type": "remote",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/cn.srs",
-        "format": "binary"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/cn.srs"
       },
       {
-        "tag": "GeoIP-CN",
         "type": "remote",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geoip/cn.srs",
-        "format": "binary"
+        "tag": "GeoIP-CN",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geoip/cn.srs"
       }
     ],
-    "auto_detect_interface": true,
     "final": "Auto",
-    "default_domain_resolver": {
-      "server": "Local-DNS"
-    }
+    "auto_detect_interface": true,
+    "default_domain_resolver": "Local-DNS",
+    "default_http_client": "rule-downloader"
   },
   "dns": {
     "servers": [
@@ -188,5 +185,12 @@
       }
     ],
     "final": "Local-DNS"
-  }
+  },
+  "http_clients": [
+    {
+      "tag": "rule-downloader",
+      "version": 2,
+      "detour": "Direct"
+    }
+  ]
 }
