@@ -1,9 +1,6 @@
 {
   "log": {
-    "disabled": false, 
-    "level": "info", 
-    "output": "", 
-    "timestamp": false
+    "level": "info"
   }, 
   "experimental": {
     "cache_file": {
@@ -108,15 +105,24 @@
         "outbound": "Auto"
       },
       {
-        "action": "route", 
         "rule_set": [
-          "GeoSite-Private", 
+          "GeoSite-Private",
           "GeoSite-Direct",
-          "GeoSite-Apple", 
+          "GeoSite-Apple",
           "GeoSite-Microsoft",
-          "GeoSite-CN",
-          "GeoIP-CN"
-        ], 
+          "GeoSite-CN"
+        ],
+        "outbound": "Direct"
+      },
+      {
+        "rule_set": "GeoSite-!CN",
+        "outbound": "Auto"
+      },
+      {
+        "action": "resolve"
+      },
+      {
+        "rule_set": "GeoIP-CN",
         "outbound": "Direct"
       }
     ], 
@@ -128,6 +134,13 @@
         "format": "source", 
         "download_detour": "Direct"
       }, 
+      {
+        "tag": "GeoSite-!CN",
+        "type": "remote",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.srs",
+        "format": "binary", 
+        "download_detour": "Direct"
+      },
       {
         "tag": "GeoSite-Github", 
         "type": "remote", 
