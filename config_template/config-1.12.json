@@ -88,7 +88,7 @@
           "GeoSite-CN"
         ], 
         "outbound": "Direct"
-      }，
+      },
       {
         "action": "route", 
         "rule_set": [
