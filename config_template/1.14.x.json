@@ -189,8 +189,7 @@
   "http_clients": [
     {
       "tag": "rule-downloader",
-      "version": 2,
-      "detour": "Direct"
+      "version": 2
     }
   ]
 }
