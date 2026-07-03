@@ -10,7 +10,9 @@
   "inbounds": [
     {
       "type": "tun", 
-      "address": "172.18.0.1/30",
+      "address": [
+        "172.18.0.1/30"
+      ],
       "auto_route": true, 
       "strict_route": true
     }
@@ -31,9 +33,9 @@
       "type": "urltest",
       "tag": "Other",
       "url": "https://www.gstatic.com/generate_204", 
-      "interval": "3m", 
-      "tolerance": 150, 
-      "interrupt_exist_connections": false, 
+      "interval": "1m", 
+      "tolerance": 50, 
+      "interrupt_exist_connections": true, 
       "outbounds": [
         "{all}"
       ],
@@ -115,14 +117,14 @@
         "outbound": "Direct"
       },
       {
-        "rule_set": "GeoSite-!CN",
+        "rule_set": ["GeoSite-!CN"],
         "outbound": "Auto"
       },
       {
         "action": "resolve"
       },
       {
-        "rule_set": "GeoIP-CN",
+        "rule_set": ["GeoIP-CN"],
         "outbound": "Direct"
       }
     ], 
