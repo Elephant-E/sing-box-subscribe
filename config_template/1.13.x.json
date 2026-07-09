@@ -95,6 +95,13 @@
         "outbound": "Direct"
       },
       {
+        "action": "route",
+        "rule_set": [
+          "GeoSite-!CN"
+        ],
+        "outbound": "Auto"
+      },
+      {
         "action": "resolve"
       },
       {
@@ -111,6 +118,13 @@
         "type": "remote",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Elephant-E/Rules/refs/heads/main/Sing-Box/direct.json",
         "format": "source",
+        "download_detour": "Direct"
+      },
+      {
+        "tag": "GeoSite-!CN",
+        "type": "remote",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.srs",
+        "format": "binary", 
         "download_detour": "Direct"
       },
       {
