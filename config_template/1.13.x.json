@@ -1,6 +1,9 @@
 {
   "log": {
-    "level": "info"
+    "disabled": false,
+    "level": "info",
+    "output": "",
+    "timestamp": false
   },
   "experimental": {
     "cache_file": {
@@ -19,16 +22,36 @@
   ],
   "outbounds": [
     {
-      "type": "urltest", 
-      "tag": "Auto", 
-      "url": "https://www.gstatic.com/generate_204", 
-      "interval": "1m", 
-      "tolerance": 50, 
-      "interrupt_exist_connections": true, 
+      "type": "urltest",
+      "tag": "Auto",
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "1m",
+      "tolerance": 50,
+      "interrupt_exist_connections": true,
       "outbounds": [
         "{all}"
       ]
-    }, 
+    },
+    {
+      "type": "urltest",
+      "tag": "US",
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "1m",
+      "tolerance": 50,
+      "interrupt_exist_connections": true,
+      "outbounds": [
+        "{all}"
+      ],
+      "filter": [
+        {
+          "action": "include",
+          "keywords": [
+            "美国",
+            "🇺🇸"
+          ]
+        }
+      ]
+    },
     {
       "type": "direct",
       "tag": "Direct"
@@ -59,107 +82,105 @@
         "action": "hijack-dns"
       },
       {
+        "action": "route",
         "ip_is_private": true,
         "outbound": "Direct"
       },
       {
+        "action": "route",
         "clash_mode": "direct",
         "outbound": "Direct"
       },
       {
+        "action": "route",
         "clash_mode": "global",
         "outbound": "Auto"
       },
       {
-        "rule_set": ["GeoSite-Github"],
+        "action": "route",
+        "rule_set": [
+          "GeoSite-Github"
+        ],
         "outbound": "Auto"
       },
       {
+        "action": "route",
         "rule_set": [
-          "GeoSite-Private",
           "GeoSite-Direct",
           "GeoSite-Apple",
           "GeoSite-Microsoft",
+          "GeoSite-Private",
           "GeoSite-CN"
         ],
         "outbound": "Direct"
       },
       {
-        "rule_set": ["GeoSite-!CN"],
-        "outbound": "Auto"
-      },
-      {
         "action": "resolve"
       },
       {
-        "rule_set": ["GeoIP-CN"],
+        "action": "route",
+        "rule_set": [
+          "GeoIP-CN"
+        ],
         "outbound": "Direct"
       }
     ],
     "rule_set": [
       {
-        "type": "remote",
         "tag": "GeoSite-Direct",
+        "type": "remote",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Elephant-E/Rules/refs/heads/main/Sing-Box/direct.json",
         "format": "source",
-        "http_client": "rule-downloader",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Elephant-E/Rules/refs/heads/main/Sing-Box/direct.json"
+        "download_detour": "Direct"
       },
       {
-        "type": "remote",
-        "tag": "GeoSite-!CN",
-        "format": "binary",
-        "http_client": "rule-downloader",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.srs"
-      },
-      {
-        "type": "remote",
         "tag": "GeoSite-Github",
+        "type": "remote",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-github.srs",
         "format": "binary",
-        "http_client": "rule-downloader",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/github.srs"
+        "download_detour": "Direct"
       },
       {
-        "type": "remote",
         "tag": "GeoSite-Apple",
+        "type": "remote",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-apple.srs",
         "format": "binary",
-        "http_client": "rule-downloader",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/apple.srs"
+        "download_detour": "Direct"
       },
       {
-        "type": "remote",
         "tag": "GeoSite-Microsoft",
+        "type": "remote",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-microsoft.srs",
         "format": "binary",
-        "http_client": "rule-downloader",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/microsoft.srs"
+        "download_detour": "Direct"
       },
       {
-        "type": "remote",
         "tag": "GeoSite-Private",
+        "type": "remote",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-private.srs",
         "format": "binary",
-        "http_client": "rule-downloader",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/private.srs"
+        "download_detour": "Direct"
       },
       {
-        "type": "remote",
         "tag": "GeoSite-CN",
+        "type": "remote",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
         "format": "binary",
-        "http_client": "rule-downloader",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/cn.srs"
+        "download_detour": "Direct"
       },
       {
-        "type": "remote",
         "tag": "GeoIP-CN",
+        "type": "remote",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
         "format": "binary",
-        "http_client": "rule-downloader",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geoip/cn.srs"
+        "download_detour": "Direct"
       }
     ],
-    "final": "Auto",
     "auto_detect_interface": true,
+    "final": "Auto",
     "default_domain_resolver": {
       "server": "Local-DNS"
-    },
-    "default_http_client": "rule-downloader"
+    }
   },
   "dns": {
     "servers": [
@@ -205,14 +226,5 @@
       }
     ],
     "final": "Local-DNS"
-  },
-  "http_clients": [
-    {
-      "tag": "rule-downloader",
-      "detour": "Direct",
-      "domain_resolver": {
-        "server": "Local-DNS"
-      }
-    }
-  ]
+  }
 }
