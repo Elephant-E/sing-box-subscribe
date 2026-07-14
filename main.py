@@ -425,7 +425,7 @@ if __name__ == '__main__':
         config = load_json(config_template_path)
         template_name = template_list[uip]
     version_match = re.match(r'(\d+\.\d+)', template_name)
-    if version_match:
+    if version_match and not providers.get('singbox_version'):
         providers['singbox_version'] = version_match.group(1)
     nodes = process_subscribes(providers["subscribes"])
     final_config = combin_to_config(config, nodes)

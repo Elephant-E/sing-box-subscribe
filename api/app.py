@@ -72,13 +72,12 @@ def config(url):
     else:
         full_url = encoded_url
     file_param = request.args.get('file', '')
+    version_param = request.args.get('version', '')
+    params_to_remove = []
     if file_param:
-        params_to_remove = [
-            f'&file={file_param}',
-            f'file={file_param}',
-        ]
-    else:
-        params_to_remove = []
+        params_to_remove.extend([f'&file={file_param}', f'file={file_param}'])
+    if version_param:
+        params_to_remove.extend([f'&version={version_param}', f'version={version_param}'])
     full_url = full_url.replace(',', '%2C')
     for param in params_to_remove:
         if param in full_url:
@@ -100,6 +99,8 @@ def config(url):
         "subscribes": subscribes,
         "save_config_path": "./config.json"
     }
+    if version_param:
+        payload["singbox_version"] = version_param
     try:
         selected_template_index = '0'
         if file_param and file_param.isdigit() and int(file_param) >= 1:
