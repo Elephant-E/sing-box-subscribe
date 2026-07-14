@@ -74,30 +74,55 @@ python main.py --template_index=0
 
 ## 自定义模板
 
-模板是标准的 sing-box 配置文件，只需在出站的 `outbounds` 列表中使用占位符：
+模板是标准的 sing-box 配置文件，在出站的 `outbounds` 中使用占位符插入节点：
 
-- `{all}` — 插入所有节点
-- `{tag名}` — 插入对应订阅的节点（如 `{sub_1}`）
+| 占位符 | 说明 |
+|--------|------|
+| `{all}` | 插入所有节点 |
+| `{sub_1}` | 插入第1个订阅的节点（多个订阅时用 sub_1、sub_2...） |
 
-示例：
+### 节点筛选
+
+在出站中添加 `filter` 字段，按关键词筛选节点：
 
 ```json
 {
-  "outbounds": [
+  "type": "selector",
+  "tag": "Proxy",
+  "outbounds": ["{all}"]
+}
+```
+
+排除包含"香港"的节点：
+
+```json
+{
+  "type": "selector",
+  "tag": "Other",
+  "outbounds": ["{all}"],
+  "filter": [
     {
-      "type": "selector",
-      "tag": "Proxy",
-      "outbounds": ["{all}"]
-    },
-    {
-      "type": "direct",
-      "tag": "Direct"
+      "action": "exclude",
+      "keywords": ["香港"]
     }
   ]
 }
 ```
 
-模板文件名建议包含版本号（如 `1.14.x.json`），项目会自动识别并过滤不兼容协议。
+仅包含匹配的节点：
+
+```json
+"filter": [
+  {
+    "action": "include",
+    "keywords": ["日本", "新加坡"]
+  }
+]
+```
+
+### 版本识别
+
+模板文件名包含版本号（如 `1.14.x.json`）时，自动过滤不兼容协议。文件名不含版本号时，用 `&version=1.14` 参数指定。
 
 ## 部署
 
