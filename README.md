@@ -72,6 +72,33 @@ python main.py --template_index=0
 | 1.13.x | 1.13 | |
 | 1.14.x | 1.14 | |
 
+## 自定义模板
+
+模板是标准的 sing-box 配置文件，只需在出站的 `outbounds` 列表中使用占位符：
+
+- `{all}` — 插入所有节点
+- `{tag名}` — 插入对应订阅的节点（如 `{sub_1}`）
+
+示例：
+
+```json
+{
+  "outbounds": [
+    {
+      "type": "selector",
+      "tag": "Proxy",
+      "outbounds": ["{all}"]
+    },
+    {
+      "type": "direct",
+      "tag": "Direct"
+    }
+  ]
+}
+```
+
+模板文件名建议包含版本号（如 `1.14.x.json`），项目会自动识别并过滤不兼容协议。
+
 ## 部署
 
 ### Vercel
