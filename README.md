@@ -1,5 +1,7 @@
 # sing-box 订阅转换
 
+Based on [Toperlock/sing-box-subscribe](https://github.com/Toperlock/sing-box-subscribe)
+
 根据配置模板和订阅链接生成 sing-box 配置文件。
 
 支持 sing-box 1.11 / 1.12 / 1.13 / 1.14，自动根据模板版本过滤不兼容协议。
