@@ -1,9 +1,5 @@
 import base64,requests,random,string,re,chardet,urllib.parse
-import warnings
-from cryptography.utils import CryptographyDeprecationWarning
-with warnings.catch_warnings(action="ignore", category=CryptographyDeprecationWarning):
-    import paramiko
-from scp import SCPClient
+
 
 def get_encoding(file):
     with open(file,'rb') as f:
@@ -304,33 +300,4 @@ def getResponse(url, custom_user_agent=None):
             return None
     except:
         return None
-    
-class ConfigSSH:
-    server = {'ip':None,'port':22,'user':None,'password':''}
-    def __init__(self,server:dict) -> None:
-        for k in self.server:
-            if k != 'port' and not k in server.keys():
-                return None
-            if k in server.keys():
-                self.server[k] = server[k]
-    def connect(self):
-        ssh = paramiko.SSHClient()
-        ssh.load_system_host_keys()
-        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(hostname=self.server['ip'],port=22, username=self.server['user'], password=self.server['password'])
-        self.ssh = ssh
 
-    def execCMD(self,command:str):
-        stdin, stdout, stderr = self.ssh.exec_command(command) 
-        print(stdout.read().decode('utf-8')) 
-
-    def uploadFile(self,source:str,target:str):
-        scp = SCPClient(self.ssh.get_transport())
-        scp.put(source, recursive=True, remote_path=target)
-
-    def getFile(self,remote:str,local:str):
-        scp = SCPClient(self.ssh.get_transport())
-        scp.get(remote,local)
-
-    def close(self):
-        self.ssh.close()

@@ -102,6 +102,7 @@
         "outbound": "Auto"
       },
       {
+        "action": "route",
         "rule_set": [
           "GeoSite-Private",
           "GeoSite-Direct",
@@ -112,6 +113,7 @@
         "outbound": "Direct"
       },
       {
+        "action": "route",
         "rule_set": ["GeoSite-!CN"],
         "outbound": "Auto"
       },
@@ -119,6 +121,7 @@
         "action": "resolve"
       },
       {
+        "action": "route",
         "rule_set": ["GeoIP-CN"],
         "outbound": "Direct"
       }

@@ -59,22 +59,27 @@
         "action": "hijack-dns"
       },
       {
+        "action": "route",
         "ip_is_private": true,
         "outbound": "Direct"
       },
       {
+        "action": "route",
         "clash_mode": "direct",
         "outbound": "Direct"
       },
       {
+        "action": "route",
         "clash_mode": "global",
         "outbound": "Auto"
       },
       {
+        "action": "route",
         "rule_set": ["GeoSite-Github"],
         "outbound": "Auto"
       },
       {
+        "action": "route",
         "rule_set": [
           "GeoSite-Private",
           "GeoSite-Direct",
@@ -85,6 +90,7 @@
         "outbound": "Direct"
       },
       {
+        "action": "route",
         "rule_set": ["GeoSite-!CN"],
         "outbound": "Auto"
       },
@@ -92,6 +98,7 @@
         "action": "resolve"
       },
       {
+        "action": "route",
         "rule_set": ["GeoIP-CN"],
         "outbound": "Direct"
       }
