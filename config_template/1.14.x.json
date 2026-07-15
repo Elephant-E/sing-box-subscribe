@@ -172,8 +172,7 @@
     "servers": [
       {
         "tag": "Local-DNS",
-        "type": "local",
-        "prefer_go": true
+        "type": "local"
       },
       {
         "tag": "Remote-DNS",
