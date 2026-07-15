@@ -176,9 +176,8 @@
   "dns": {
     "servers": [
       {
-        "tag": "Local-DNS", 
-        "type": "udp",
-        "server": "223.5.5.5"
+        "tag": "Local-DNS",
+        "type": "local"
       }, 
       {
         "tag": "Remote-DNS", 

@@ -190,9 +190,8 @@
   "dns": {
     "servers": [
       {
-        "tag": "Local-DNS", 
-        "address": "223.5.5.5", 
-        "detour": "Direct"
+        "tag": "Local-DNS",
+        "address": "local"
       }, 
       {
         "tag": "Remote-DNS", 
