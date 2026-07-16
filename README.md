@@ -137,3 +137,26 @@ python main.py --template_index=0
 ## 支持的协议
 
 vmess、vless、shadowsocks、trojan、tuic、hysteria、hysteria2、wireguard、socks、http、anytls、shadowtls
+
+## AI 辅助配置生成
+
+项目内置了 sing-box 配置生成 Skill，可配合 AI 助手（如 CodeArts）使用，自动引导生成配置。
+
+### 使用方式
+
+1. 在 AI 助手中加载 `skill/sing-box-config/skill.md`
+2. 告诉 AI 你的需求，例如：
+   - "帮我生成一个 TUN 模式的 sing-box 1.14 配置，国内直连国外走代理"
+   - "我要一个 mixed 系统代理配置，用 FakeIP"
+3. AI 会逐步询问你的需求，然后生成完整配置
+
+### Skill 目录结构
+
+```
+skill/sing-box-config/
+├── skill.md                              # 工作流指令
+├── reference.md                          # sing-box 完整配置参考文档
+└── examples/                             # 示例配置
+    ├── tun-fakeip-cn-direct.json         # TUN + FakeIP + 国内直连
+    └── tun-mixed-cn-direct.json          # TUN + Mixed + 国内直连
+```
