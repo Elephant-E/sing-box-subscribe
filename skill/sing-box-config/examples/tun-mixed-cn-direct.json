@@ -209,7 +209,7 @@
   "http_clients": [
     {
       "tag": "rule-downloader",
-      "detour": "Direct",
+
       "domain_resolver": {
         "server": "Local-DNS"
       }
