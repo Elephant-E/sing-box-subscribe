@@ -30,6 +30,23 @@
       ]
     }, 
     {
+      "type": "urltest", 
+      "tag": "US", 
+      "url": "https://www.gstatic.com/generate_204", 
+      "interval": "3m", 
+      "tolerance": 150, 
+      "interrupt_exist_connections": false, 
+      "outbounds": [
+        "{all}"
+      ],
+      "filter": [
+        {
+          "action": "include",
+          "keywords": ["美国"]
+        }
+      ]
+    }, 
+    {
       "type": "direct", 
       "tag": "Direct"
     }
@@ -73,6 +90,13 @@
         "clash_mode": "global", 
         "outbound": "Auto"
       }, 
+      {
+        "action": "route", 
+        "rule_set": [
+          "GeoSite-Proxy"
+        ], 
+        "outbound": "US"
+      },
       {
         "action": "route", 
         "rule_set": [
@@ -129,6 +153,13 @@
         "tag": "GeoSite-Github",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/github.srs",
         "format": "binary", 
+        "download_detour": "Direct"
+      },
+      {
+        "type": "remote",
+        "tag": "GeoSite-Proxy",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Elephant-E/Rules/refs/heads/main/Sing-Box/Proxy.json",
+        "format": "source", 
         "download_detour": "Direct"
       },
       {

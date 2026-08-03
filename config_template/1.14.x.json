@@ -30,6 +30,23 @@
       ]
     }, 
     {
+      "type": "urltest", 
+      "tag": "US", 
+      "url": "http://cp.cloudflare.com/generate_204", 
+      "interval": "30m", 
+      "tolerance": 100, 
+      "interrupt_exist_connections": true, 
+      "outbounds": [
+        "{all}"
+      ],
+      "filter": [
+        {
+          "action": "include",
+          "keywords": ["美国"]
+        }
+      ]
+    }, 
+    {
       "type": "direct",
       "tag": "Direct"
     }
@@ -72,6 +89,11 @@
         "action": "route",
         "clash_mode": "global",
         "outbound": "Auto"
+      },
+      {
+        "action": "route",
+        "rule_set": ["GeoSite-Proxy"],
+        "outbound": "US"
       },
       {
         "action": "route",
@@ -124,6 +146,13 @@
         "format": "binary",
         "http_client": "rule-downloader",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/github.srs"
+      },
+      {
+        "type": "remote",
+        "tag": "GeoSite-Proxy",
+        "format": "source",
+        "http_client": "rule-downloader",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Elephant-E/Rules/refs/heads/main/Sing-Box/Proxy.json"
       },
       {
         "type": "remote",

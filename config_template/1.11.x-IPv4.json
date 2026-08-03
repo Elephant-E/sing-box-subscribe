@@ -30,8 +30,8 @@
       ]
     }, 
     {
-      "type": "urltest",
-      "tag": "Other",
+      "type": "urltest", 
+      "tag": "US", 
       "url": "http://cp.cloudflare.com/generate_204", 
       "interval": "30m", 
       "tolerance": 100, 
@@ -40,14 +40,12 @@
         "{all}"
       ],
       "filter": [
-        {            
-          "action": "exclude",          
-          "keywords": [            
-            "香港"        
-          ]
+        {
+          "action": "include",
+          "keywords": ["美国"]
         }
       ]
-    },
+    }, 
     {
       "type": "direct", 
       "tag": "Direct"
@@ -93,11 +91,9 @@
         "outbound": "Auto"
       }, 
       {
-        "action": "route", 
-        "rule_set": [
-          "GeoSite-TikTok"
-        ], 
-        "outbound": "Other"
+        "action": "route",
+        "rule_set": ["GeoSite-Proxy"],
+        "outbound": "US"
       },
       {
         "action": "route", 
@@ -154,10 +150,10 @@
         "download_detour": "Direct"
       }, 
       {
-        "tag": "GeoSite-TikTok", 
+        "tag": "GeoSite-Proxy", 
         "type": "remote", 
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/tiktok.srs", 
-        "format": "binary", 
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Elephant-E/Rules/refs/heads/main/Sing-Box/Proxy.json", 
+        "format": "source", 
         "download_detour": "Direct"
       }, 
       {

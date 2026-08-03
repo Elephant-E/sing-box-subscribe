@@ -95,12 +95,12 @@ python main.py --template_index=0
 }
 ```
 
-排除包含"香港"的节点：
+排除包含"香港"的节点（创建独立分组，如 `No-HK`）：
 
 ```json
 {
   "type": "selector",
-  "tag": "Other",
+  "tag": "No-HK",
   "outbounds": ["{all}"],
   "filter": [
     {
