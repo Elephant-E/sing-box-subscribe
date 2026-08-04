@@ -126,10 +126,16 @@ def config(url):
 class _StripApiPrefix:
     """兼容 Vercel Python Runtime 的路径前缀处理。
 
-    新版 Vercel Python 构建器会将 rewrite 后的路径（如 /api/app）作为
-    PATH_INFO 传给 Flask，而应用路由定义的是 /、/generate_config、
-    /config/<path>。此中间件剥离 /api/app 前缀，保证路由正常匹配；
-    对旧版 runtime（PATH_INFO 已是原始路径）则不做改动。
+    Vercel 通过 vercel.json 的 rewrites 把所有路径转发到 /api/app。
+    配合 $1 捕获组透传原始路径后，PATH_INFO 形如 /api/app/<原始路径>，
+    此中间件剥离 /api/app 前缀，还原应用自身的路由（/、/generate_config、
+    /config/<path>）。
+
+    覆盖四种输入形态：
+      - /api/app        -> /
+      - /api/app/       -> /
+      - /api/app/config -> /config
+      - /config         -> /config （旧版 runtime 已还原，保持原样）
     """
     def __init__(self, wsgi_app, prefix='/api/app'):
         self.wsgi_app = wsgi_app
@@ -137,10 +143,11 @@ class _StripApiPrefix:
 
     def __call__(self, environ, start_response):
         path = environ.get('PATH_INFO', '')
-        if path == self.prefix:
+        if path == self.prefix or path == self.prefix + '/':
             environ['PATH_INFO'] = '/'
         elif path.startswith(self.prefix + '/'):
-            environ['PATH_INFO'] = path[len(self.prefix):]
+            stripped = path[len(self.prefix):]
+            environ['PATH_INFO'] = stripped if stripped else '/'
         return self.wsgi_app(environ, start_response)
 
 
