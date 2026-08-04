@@ -154,6 +154,8 @@ def _process_shadowtls(data):
 
 def parse_content(content):
     nodelist = []
+    if not content:
+        return nodelist
     for t in content.splitlines():
         t = t.strip()
         if len(t) == 0:
