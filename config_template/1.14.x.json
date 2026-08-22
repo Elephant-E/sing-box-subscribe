@@ -19,33 +19,49 @@
   ],
   "outbounds": [
     {
-      "type": "urltest", 
-      "tag": "Auto", 
-      "url": "http://cp.cloudflare.com/generate_204", 
-      "interval": "30m", 
-      "tolerance": 100, 
-      "interrupt_exist_connections": true, 
-      "outbounds": [
-        "{all}"
-      ]
-    }, 
-    {
-      "type": "urltest", 
-      "tag": "US", 
-      "url": "http://cp.cloudflare.com/generate_204", 
-      "interval": "30m", 
-      "tolerance": 100, 
-      "interrupt_exist_connections": true, 
+      "type": "urltest",
+      "tag": "Auto",
+      "url": "http://cp.cloudflare.com/generate_204",
+      "interval": "30m",
+      "tolerance": 100,
+      "interrupt_exist_connections": true,
       "outbounds": [
         "{all}"
       ],
       "filter": [
         {
           "action": "include",
-          "keywords": ["美国"]
+          "keywords": [
+            "香港",
+            "HK",
+            "Hong Kong",
+            "🇭🇰"
+          ]
         }
       ]
-    }, 
+    },
+    {
+      "type": "urltest",
+      "tag": "Other",
+      "url": "http://cp.cloudflare.com/generate_204",
+      "interval": "30m",
+      "tolerance": 100,
+      "interrupt_exist_connections": true,
+      "outbounds": [
+        "{all}"
+      ],
+      "filter": [
+        {
+          "action": "exclude",
+          "keywords": [
+            "香港",
+            "HK",
+            "Hong Kong",
+            "🇭🇰"
+          ]
+        }
+      ]
+    },
     {
       "type": "direct",
       "tag": "Direct"
@@ -92,12 +108,16 @@
       },
       {
         "action": "route",
-        "rule_set": ["GeoSite-Proxy"],
-        "outbound": "US"
+        "rule_set": [
+          "GeoSite-Proxy"
+        ],
+        "outbound": "Other"
       },
       {
         "action": "route",
-        "rule_set": ["GeoSite-Github"],
+        "rule_set": [
+          "GeoSite-Github"
+        ],
         "outbound": "Auto"
       },
       {
@@ -113,7 +133,9 @@
       },
       {
         "action": "route",
-        "rule_set": ["GeoSite-!CN"],
+        "rule_set": [
+          "GeoSite-!CN"
+        ],
         "outbound": "Auto"
       },
       {
@@ -121,7 +143,9 @@
       },
       {
         "action": "route",
-        "rule_set": ["GeoIP-CN"],
+        "rule_set": [
+          "GeoIP-CN"
+        ],
         "outbound": "Direct"
       }
     ],
@@ -244,7 +268,6 @@
   "http_clients": [
     {
       "tag": "rule-downloader",
-
       "domain_resolver": {
         "server": "Local-DNS"
       }

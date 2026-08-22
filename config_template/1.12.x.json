@@ -1,64 +1,80 @@
 {
   "log": {
     "level": "info"
-  }, 
+  },
   "experimental": {
     "cache_file": {
       "enabled": true
     }
-  }, 
+  },
   "inbounds": [
     {
-      "type": "tun", 
+      "type": "tun",
       "address": [
         "172.18.0.1/30"
       ],
-      "auto_route": true, 
+      "auto_route": true,
       "strict_route": true
     }
-  ], 
+  ],
   "outbounds": [
     {
-      "type": "urltest", 
-      "tag": "Auto", 
-      "url": "https://www.gstatic.com/generate_204", 
-      "interval": "3m", 
-      "tolerance": 150, 
-      "interrupt_exist_connections": false, 
-      "outbounds": [
-        "{all}"
-      ]
-    }, 
-    {
-      "type": "urltest", 
-      "tag": "US", 
-      "url": "https://www.gstatic.com/generate_204", 
-      "interval": "3m", 
-      "tolerance": 150, 
-      "interrupt_exist_connections": false, 
+      "type": "urltest",
+      "tag": "Auto",
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "3m",
+      "tolerance": 150,
+      "interrupt_exist_connections": false,
       "outbounds": [
         "{all}"
       ],
       "filter": [
         {
           "action": "include",
-          "keywords": ["美国"]
+          "keywords": [
+            "香港",
+            "HK",
+            "Hong Kong",
+            "🇭🇰"
+          ]
         }
       ]
-    }, 
+    },
     {
-      "type": "direct", 
+      "type": "urltest",
+      "tag": "Other",
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "3m",
+      "tolerance": 150,
+      "interrupt_exist_connections": false,
+      "outbounds": [
+        "{all}"
+      ],
+      "filter": [
+        {
+          "action": "exclude",
+          "keywords": [
+            "香港",
+            "HK",
+            "Hong Kong",
+            "🇭🇰"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "direct",
       "tag": "Direct"
     }
-  ], 
+  ],
   "route": {
     "rules": [
       {
-        "action": "sniff", 
+        "action": "sniff",
         "sniffer": [
-          "http", 
-          "tls", 
-          "quic", 
+          "http",
+          "tls",
+          "quic",
           "dns"
         ]
       },
@@ -81,45 +97,45 @@
         "outbound": "Direct"
       },
       {
-        "action": "route", 
-        "clash_mode": "direct", 
+        "action": "route",
+        "clash_mode": "direct",
         "outbound": "Direct"
-      }, 
+      },
       {
-        "action": "route", 
-        "clash_mode": "global", 
+        "action": "route",
+        "clash_mode": "global",
         "outbound": "Auto"
-      }, 
+      },
       {
-        "action": "route", 
+        "action": "route",
         "rule_set": [
           "GeoSite-Proxy"
-        ], 
-        "outbound": "US"
+        ],
+        "outbound": "Other"
       },
       {
-        "action": "route", 
+        "action": "route",
         "rule_set": [
           "GeoSite-Github"
-        ], 
+        ],
         "outbound": "Auto"
       },
       {
-        "action": "route", 
+        "action": "route",
         "rule_set": [
           "GeoSite-Direct",
-          "GeoSite-Apple", 
-          "GeoSite-Microsoft", 
-          "GeoSite-Private", 
+          "GeoSite-Apple",
+          "GeoSite-Microsoft",
+          "GeoSite-Private",
           "GeoSite-CN"
-        ], 
+        ],
         "outbound": "Direct"
       },
       {
-        "action": "route", 
+        "action": "route",
         "rule_set": [
           "GeoSite-!CN"
-        ], 
+        ],
         "outbound": "Auto"
       },
       {
@@ -132,73 +148,73 @@
         ],
         "outbound": "Direct"
       }
-    ], 
+    ],
     "rule_set": [
       {
         "type": "remote",
         "tag": "GeoSite-Direct",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Elephant-E/Rules/refs/heads/main/Sing-Box/direct.json",
-        "format": "source", 
+        "format": "source",
         "download_detour": "Direct"
       },
       {
         "type": "remote",
         "tag": "GeoSite-!CN",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.srs",
-        "format": "binary", 
+        "format": "binary",
         "download_detour": "Direct"
       },
       {
         "type": "remote",
         "tag": "GeoSite-Github",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/github.srs",
-        "format": "binary", 
+        "format": "binary",
         "download_detour": "Direct"
       },
       {
         "type": "remote",
         "tag": "GeoSite-Proxy",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Elephant-E/Rules/refs/heads/main/Sing-Box/Proxy.json",
-        "format": "source", 
+        "format": "source",
         "download_detour": "Direct"
       },
       {
         "type": "remote",
         "tag": "GeoSite-Apple",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/apple.srs",
-        "format": "binary", 
+        "format": "binary",
         "download_detour": "Direct"
       },
       {
         "type": "remote",
         "tag": "GeoSite-Microsoft",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/microsoft.srs",
-        "format": "binary", 
+        "format": "binary",
         "download_detour": "Direct"
       },
       {
         "type": "remote",
         "tag": "GeoSite-Private",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/private.srs",
-        "format": "binary", 
+        "format": "binary",
         "download_detour": "Direct"
       },
       {
         "type": "remote",
         "tag": "GeoSite-CN",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/cn.srs",
-        "format": "binary", 
+        "format": "binary",
         "download_detour": "Direct"
       },
       {
         "type": "remote",
         "tag": "GeoIP-CN",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geoip/cn.srs",
-        "format": "binary", 
+        "format": "binary",
         "download_detour": "Direct"
       }
-    ], 
-    "auto_detect_interface": true, 
+    ],
+    "auto_detect_interface": true,
     "final": "Auto",
     "default_domain_resolver": {
       "server": "Local-DNS"
@@ -207,24 +223,24 @@
   "dns": {
     "servers": [
       {
-        "tag": "Local-DNS", 
+        "tag": "Local-DNS",
         "type": "udp",
         "server": "223.5.5.5"
-      }, 
+      },
       {
-        "tag": "Remote-DNS", 
+        "tag": "Remote-DNS",
         "type": "fakeip",
         "inet4_range": "198.18.0.0/15",
         "inet6_range": "fc00::/18"
       }
-    ], 
+    ],
     "rules": [
       {
-        "action": "reject", 
+        "action": "reject",
         "query_type": [
           "HTTPS"
-        ] 
-      }, 
+        ]
+      },
       {
         "type": "logical",
         "mode": "and",
@@ -242,27 +258,12 @@
             ]
           }
         ],
-        "action": "route", 
-        "server": "Remote-DNS", 
+        "action": "route",
+        "server": "Remote-DNS",
         "rewrite_ttl": 1
       }
-    ], 
-    "final": "Local-DNS", 
+    ],
+    "final": "Local-DNS",
     "independent_cache": true
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

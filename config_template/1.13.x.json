@@ -30,11 +30,22 @@
       "interrupt_exist_connections": true,
       "outbounds": [
         "{all}"
+      ],
+      "filter": [
+        {
+          "action": "include",
+          "keywords": [
+            "香港",
+            "HK",
+            "Hong Kong",
+            "🇭🇰"
+          ]
+        }
       ]
     },
     {
       "type": "urltest",
-      "tag": "US",
+      "tag": "Other",
       "url": "http://cp.cloudflare.com/generate_204",
       "interval": "30m",
       "tolerance": 100,
@@ -44,8 +55,13 @@
       ],
       "filter": [
         {
-          "action": "include",
-          "keywords": ["美国"]
+          "action": "exclude",
+          "keywords": [
+            "香港",
+            "HK",
+            "Hong Kong",
+            "🇭🇰"
+          ]
         }
       ]
     },
@@ -98,7 +114,7 @@
         "rule_set": [
           "GeoSite-Proxy"
         ],
-        "outbound": "US"
+        "outbound": "Other"
       },
       {
         "action": "route",
@@ -148,7 +164,7 @@
         "tag": "GeoSite-!CN",
         "type": "remote",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.srs",
-        "format": "binary", 
+        "format": "binary",
         "download_detour": "Direct"
       },
       {
