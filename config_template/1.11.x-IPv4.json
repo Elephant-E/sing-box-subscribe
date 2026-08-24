@@ -30,19 +30,22 @@
       ],
       "filter": [
         {
-          "action": "include",
+          "action": "exclude",
           "keywords": [
-            "香港",
-            "HK",
-            "Hong Kong",
-            "🇭🇰"
+            "🇺🇸",
+            "美国",
+            "美國",
+            "US",
+            "USA",
+            "United States",
+            "America"
           ]
         }
       ]
     },
     {
       "type": "urltest",
-      "tag": "Other",
+      "tag": "US",
       "url": "http://cp.cloudflare.com/generate_204",
       "interval": "30m",
       "tolerance": 100,
@@ -52,12 +55,15 @@
       ],
       "filter": [
         {
-          "action": "exclude",
+          "action": "include",
           "keywords": [
-            "香港",
-            "HK",
-            "Hong Kong",
-            "🇭🇰"
+            "🇺🇸",
+            "美国",
+            "美國",
+            "US",
+            "USA",
+            "United States",
+            "America"
           ]
         }
       ]
@@ -111,7 +117,7 @@
         "rule_set": [
           "GeoSite-Proxy"
         ],
-        "outbound": "Other"
+        "outbound": "US"
       },
       {
         "action": "route",
