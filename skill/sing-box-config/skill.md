@@ -14,7 +14,7 @@
    - 目标设备？（Android / iOS / macOS / Windows / Linux / 路由器，不确定则生成通用配置）
    - 代理协议？（shadowsocks / vmess / vless / trojan / hysteria2 / tuic / wireguard / 其他）
    - 入站模式？（TUN 透明代理 / TUN+Mixed / Mixed 系统代理，不确定则默认 TUN+Mixed）
-   - sing-box 版本？（1.11 / 1.12 / 1.13 / 1.14，不确定则默认 1.14）
+   - sing-box 版本？（1.11 / 1.12 / 1.13 / 1.14 / 1.15，不确定则默认 1.14；1.15 目前为 alpha）
 
 2. **网络环境**
    - IPv4 only 还是 IPv4+IPv6？（不确定则默认 IPv4 only，避免 IPv6 网络不通时连接失败）
@@ -110,6 +110,7 @@
     - 1.11→1.12：`download_detour` 替代方案、DNS strategy 位置变更
     - 1.12→1.13：`independent_cache` 弃用、`inbound.sniff` 移至 route rule action
     - 1.13→1.14：`download_detour` 弃用改用 `http_client`、`domain_strategy` 弃用改用 `domain_resolver`、DNS `strategy` 弃用
+    - 1.14→1.15：`tun.stack` 弃用（移除该选项即启用新自研 TCP/IP 栈，1.17.0 移除）、HTTP outbound 默认改走 HTTP/2、可按需使用新增的 MASQUE / Tailcat endpoint
 18. Clash/V2Ray 迁移时，参考以下映射：
     - Clash proxy-groups → sing-box selector/urltest
     - Clash rules → sing-box route.rules

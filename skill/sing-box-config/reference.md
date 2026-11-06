@@ -34,6 +34,7 @@
   - [Wi-Fi State](#wi-fi-state)
   - [Neighbor Resolution](#neighbor-resolution)
 - [Service 配置](#service-配置)
+- [sing-box 1.15.0 主要变更](#sing-box-1150-主要变更)
 - [sing-box 1.14.0 主要变更](#sing-box-1140-主要变更)
 - [命令行工具](#命令行工具)
 
@@ -1954,6 +1955,8 @@ TUN 接口上 DNS 的处理方式。
 
 ##### stack
 
+[弃用1.15][移除1.17]
+
 TCP/IP 栈。
 
 | 栈 | 说明 |
@@ -1963,6 +1966,8 @@ TCP/IP 栈。
 | `mixed` | 混合 `system` TCP 栈和 `gvisor` UDP 栈 |
 
 默认使用 `mixed` 栈（如果启用 gVisor 构建标签），否则默认使用 `system` 栈。
+
+自 1.15.0 起，sing-tun 改用自研 TCP/IP 栈，峰值性能、能效与内存占用均显著优于旧的 system / gVisor 实现。**新配置直接省略该选项即可启用新栈**，无需再选择 `system` / `gvisor` / `mixed`。该选项将在 1.17.0 移除。
 
 ##### include_interface / exclude_interface
 
@@ -2804,6 +2809,47 @@ V2Ray 传输层配置，用于 VMess、VLESS 等协议。
 #### tag
 
 服务的标签。
+
+---
+
+## sing-box 1.15.0 主要变更
+
+> 1.15 目前为 alpha（最新 1.15.0-alpha.13），稳定版为 1.14.4。
+
+### 新增功能
+
+1. **TUN / TCP/IP 栈**
+   - 自研 TCP/IP 栈取代原 system / gVisor 实现，移除 `stack` 选项即启用
+   - Android `auto_redirect` 完整支持（经图形客户端 root 服务或 root shell）
+
+2. **HTTP 代理重写**
+   - HTTP inbound / outbound 支持 HTTP/2、HTTP/3 与 CONNECT-UDP（UDP over HTTP）
+   - HTTP outbound 默认走 HTTP/2，失败自动回退 HTTP/1.1；配置了 `path` 或 Host 头时仍用 HTTP/1.1；HTTP/3 通过 `version` 选项开启
+
+3. **MASQUE**
+   - 新增 `masque` Client / Server endpoint，基于 CONNECT-IP 的 IP 代理
+   - 支持 HTTP/1.1、HTTP/2、HTTP/3，支持地址分配与路由通告，可使用内部网络栈或系统 TUN
+
+4. **Tailcat**
+   - 新增 `tailcat` inbound / outbound：Tailscale 的数据面（经 DERP 引导的 WireGuard 点对点隧道 + NAT 穿透）
+   - DERP 服务新增 `verify_client_inbound` / `verify_client_key`
+
+5. **TLS**
+   - 新增 `certificate_sha256` / `client_certificate_sha256`，对整张证书做 SHA-256 pinning，与原有公钥 pinning 互补
+
+6. **规则**
+   - 新增 `dns_server_address`、`dns_search_domain` 规则项（匹配 DNS 服务器从系统 / DHCP / VPN 获得的服务器地址与搜索域）
+
+7. **Endpoint**
+   - 新增 `on_demand` 选项，允许必要时断开连接（WireGuard / Tailscale / OpenVPN Client / OpenConnect）
+
+8. **其他**
+   - 缓存文件写入缓冲
+   - NaiveProxy 升级至 154.0.8037.49-2
+
+### 弃用项目
+
+1. `inbound.tun.stack` - 将在 1.17.0 中移除
 
 ---
 
