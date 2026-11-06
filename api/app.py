@@ -99,8 +99,6 @@ def config(url):
         "subscribes": subscribes,
         "save_config_path": "./config.json"
     }
-    if version_param:
-        payload["singbox_version"] = version_param
     try:
         selected_template_index = '0'
         if file_param and file_param.isdigit() and int(file_param) >= 1:
@@ -108,7 +106,10 @@ def config(url):
         elif file_param:
             payload["config_template"] = unquote(file_param)
         temp_json_data = json.dumps(json.dumps(payload, ensure_ascii=False), ensure_ascii=False)
-        subprocess.check_call([sys.executable, 'main.py', '--template_index', selected_template_index, '--temp_json_data', temp_json_data])
+        cmd = [sys.executable, 'main.py', '--template_index', selected_template_index, '--temp_json_data', temp_json_data]
+        if version_param:
+            cmd.extend(['--singbox_version', version_param])
+        subprocess.check_call(cmd)
         config_file_path = os.path.join('/tmp/', 'config.json')
         if not os.path.exists(config_file_path):
             config_file_path = 'config.json'

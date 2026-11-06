@@ -4,7 +4,7 @@ Based on [Toperlock/sing-box-subscribe](https://github.com/Toperlock/sing-box-su
 
 根据配置模板和订阅链接生成 sing-box 配置文件。
 
-支持 sing-box 1.11 / 1.12 / 1.13 / 1.14，自动根据模板版本过滤不兼容协议。
+支持 sing-box 1.11 / 1.12 / 1.13 / 1.14 / 1.15（1.15 目前为 alpha），自动根据模板版本过滤不兼容协议。
 
 ## API
 
@@ -49,6 +49,7 @@ https://你的域名/config/https://sub1.example.com|https://sub2.example.com&fi
 |------|---------|
 | shadowtls | 1.11 |
 | anytls | 1.12 |
+| tailcat | 1.15 |
 
 使用低于最低版本的模板时，对应协议节点会被自动过滤。
 
@@ -73,6 +74,24 @@ python main.py --template_index=0
 | 1.12.x | 1.12 | |
 | 1.13.x | 1.13 | |
 | 1.14.x | 1.14 | |
+| 1.15.x | 1.15 | 1.15 为 alpha，配置与 1.14 一致 |
+
+## sing-box 1.15 变更说明
+
+1.15 目前仍为 alpha（最新 1.15.0-alpha.13），稳定版为 1.14.4。与配置文件相关的变更：
+
+| 变更 | 影响 |
+|------|------|
+| TUN 改用新版内置 TCP/IP 栈 | 删除 `stack` 选项即启用；`stack` 自 1.15 废弃、将在 1.17.0 移除。本模板未使用 `stack`，无需调整 |
+| HTTP 代理实现重写 | HTTP outbound 默认走 HTTP/2，失败自动回退 HTTP/1.1；配置了 `path` 或 `Host` 头时仍用 HTTP/1.1；HTTP/3 通过 `version` 选项开启；新增 CONNECT-UDP（UDP over HTTP） |
+| 新增 MASQUE 客户端 / 服务端 endpoint | CONNECT-IP 形式的 IP 代理，可选能力，模板未启用 |
+| 新增 Tailcat inbound / outbound | Tailscale 的数据面（经 DERP 引导的 WireGuard 点对点隧道）；订阅中出现该类型时，1.15 以下版本会被过滤 |
+| 新增 TLS 证书 pinning | `certificate_sha256` / `client_certificate_sha256`，与原有公钥 pinning 互补 |
+| 新增 DNS / 路由规则项 | `dns_server_address`、`dns_search_domain` |
+| 新增 endpoint `on_demand` 选项 | WireGuard / Tailscale / OpenVPN Client / OpenConnect |
+| 缓存文件写入缓冲 | 性能优化 |
+
+另附 1.14 遗留的废弃项（将于 1.16.0 移除）：`download_detour` 由 `http_client` 取代；隐式默认 HTTP client 需显式配置 `http_clients` 与 `route.default_http_client`。本项目的 1.14 / 1.15 模板均已按新写法配置。
 
 ## 自定义模板
 
@@ -124,7 +143,9 @@ python main.py --template_index=0
 
 ### 版本识别
 
-模板文件名包含版本号（如 `1.14.x.json`）时，自动过滤不兼容协议。文件名不含版本号时，用 `&version=1.14` 参数指定。
+模板文件名包含版本号（如 `1.15.x.json`）时，自动按该版本过滤不兼容协议；文件名不含版本号时回退到 `providers.json` 的 `singbox_version`（缺省 1.14）。
+
+优先级：`&version=` 参数 > 模板文件名 > `providers.json`。需要用非模板版本测试时，用 `&version=1.15`（或命令行 `--singbox_version 1.15`）强制指定。
 
 ## 部署
 

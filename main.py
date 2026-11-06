@@ -12,6 +12,7 @@ color_code = [31, 32, 33, 34, 35, 36, 91, 92, 93, 94, 95, 96]
 VERSION_OUTBOUND_MAP = {
     'shadowtls': (1, 11),
     'anytls': (1, 12),
+    'tailcat': (1, 15),
 }
 
 
@@ -49,6 +50,20 @@ def get_singbox_version():
         return (int(parts[0]), int(parts[1]))
     except:
         return (1, 14)
+
+
+def resolve_singbox_version(providers, template_name, explicit=None):
+    """确定本次使用的 sing-box 版本。
+
+    优先级：显式指定（--singbox_version / URL 的 &version=）> 模板文件名 > providers 配置。
+    模板文件名的版本最贴近该模板的配置写法，因此高于 providers.json 的默认值。
+    """
+    if explicit:
+        return explicit
+    version_match = re.match(r'(\d+\.\d+)', template_name or '')
+    if version_match:
+        return version_match.group(1)
+    return providers.get('singbox_version')
 
 
 def filter_by_version(nodes):
@@ -401,6 +416,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--temp_json_data', type=parse_json, help='临时内容')
     parser.add_argument('--template_index', type=int, help='模板序号')
+    parser.add_argument('--singbox_version', help='sing-box 版本，覆盖模板文件名推断（如 1.14）')
     args = parser.parse_args()
     temp_json_data = args.temp_json_data
 
@@ -426,9 +442,9 @@ if __name__ == '__main__':
         print('选择: \033[33m' + template_list[uip] + '.json\033[0m')
         config = load_json(config_template_path)
         template_name = template_list[uip]
-    version_match = re.match(r'(\d+\.\d+)', template_name)
-    if version_match and not providers.get('singbox_version'):
-        providers['singbox_version'] = version_match.group(1)
+    resolved_version = resolve_singbox_version(providers, template_name, args.singbox_version)
+    if resolved_version:
+        providers['singbox_version'] = resolved_version
     nodes = process_subscribes(providers["subscribes"])
     final_config = combin_to_config(config, nodes)
     save_config(providers["save_config_path"], final_config)
