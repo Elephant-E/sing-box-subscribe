@@ -176,7 +176,7 @@
         "tag": "GeoSite-OpenAI",
         "format": "binary",
         "http_client": "rule-downloader",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Elephant-E/Rules/refs/heads/main/Sing-Box/openai.srs"
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/openai.srs"
       },
       {
         "type": "remote",
