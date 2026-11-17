@@ -115,7 +115,8 @@
       {
         "action": "route",
         "rule_set": [
-          "GeoSite-Proxy"
+          "GeoSite-Proxy",
+          "GeoSite-OpenAI"
         ],
         "outbound": "US"
       },
@@ -169,6 +170,13 @@
         "format": "binary",
         "http_client": "rule-downloader",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.srs"
+      },
+      {
+        "type": "remote",
+        "tag": "GeoSite-OpenAI",
+        "format": "binary",
+        "http_client": "rule-downloader",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/Elephant-E/Rules/refs/heads/main/Sing-Box/openai.srs"
       },
       {
         "type": "remote",
