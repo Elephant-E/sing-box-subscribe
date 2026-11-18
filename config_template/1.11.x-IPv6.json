@@ -169,7 +169,7 @@
       {
         "tag": "GeoSite-!CN",
         "type": "remote",
-        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.srs",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/geolocation-!cn.srs",
         "format": "binary",
         "download_detour": "Direct"
       },
