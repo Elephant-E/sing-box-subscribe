@@ -118,7 +118,8 @@
       {
         "action": "route",
         "rule_set": [
-          "GeoSite-Proxy"
+          "GeoSite-Proxy",
+          "GeoSite-OpenAI"
         ],
         "outbound": "US"
       },
@@ -170,6 +171,13 @@
         "tag": "GeoSite-!CN",
         "type": "remote",
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.srs",
+        "format": "binary",
+        "download_detour": "Direct"
+      },
+      {
+        "tag": "GeoSite-OpenAI",
+        "type": "remote",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/openai.srs",
         "format": "binary",
         "download_detour": "Direct"
       },
